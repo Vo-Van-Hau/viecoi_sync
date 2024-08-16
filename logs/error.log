@@ -1,0 +1,3 @@
+[2024-08-16T03:20:31.817Z] SequelizeDatabaseError: Incorrect datetime value: 'Invalid date' for column 'updated_at' at row 1 => FROM autorun_employers_tracking
+[2024-08-16T03:25:06.441Z] TypeError: Assignment to constant variable. => FROM autorun_employers_tracking
+[2024-08-16T03:35:34.671Z] TypeError: vHelper.getCleanData_BLOCKED_IPS is not a function => FROM blocked_ips

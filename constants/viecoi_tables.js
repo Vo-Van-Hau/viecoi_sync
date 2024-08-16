@@ -1,25 +1,25 @@
 module.exports = Object.assign({}, {
     AUTORUN_EMPLOYERS_TRACKING: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'autorun_employers_tracking' },
         targetTable: { name: 'autorun_employers_tracking' }
     },
     AUTORUN_JOBSEEKERS_TRACKING: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'autorun_jobseekers_tracking' },
         targetTable: { name: 'autorun_jobseekers_tracking' }
     },
     BLOCKED_IPS: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'blocked_ips' },
         targetTable: { name: 'blocked_ips' }
     },
     FAILED_EMAILS: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'failed_emails' },
         targetTable: { name: 'failed_emails' }
     },
@@ -30,14 +30,14 @@ module.exports = Object.assign({}, {
         targetTable: { name: 'failed_jobs' }
     },
     JOBS: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'jobs' },
         targetTable: { name: 'jobs' }
     },
     MIGRATIONS: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'migrations' },
         targetTable: { name: 'migrations' }
     },

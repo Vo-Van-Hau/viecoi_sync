@@ -1,5 +1,6 @@
 require('./index');
 const { logError } = require('./app/log.js');
+const vHelper = require('./vHelper.js');
 //
 const { QueryTypes } = require('sequelize');
 
@@ -33,6 +34,9 @@ async function handleTableData(tableName) {
     }
 }
 
+// console.log();
+// return;
+
 /**
  * Inserts data into the specified table in the target database.
  * @param {string} sourceTable - The name of the source table to fetch data from.
@@ -40,28 +44,22 @@ async function handleTableData(tableName) {
  */
 async function syncTableData(sourceTable, targetTable, options = {}) {
     try {
+        const { isTruncated, sourceTableKey } = options;
         const data = await handleTableData(sourceTable);
         // Check if data is available and is an array
         if(data && Array.isArray(data)) {
             // TODO: Truncate the target table before inserting new data
-            if(options.isTruncated) {
+            if(isTruncated) {
                 await sequelizeSync.query(`TRUNCATE TABLE \`${targetTable}\``, {
                     type: QueryTypes.RAW,
                 });
             }
             // TODO: Insert data into the target table
-            for (const item of data) {
+            for(let item of data) {
                 // TODO: Clean data items before inserting into the target database
                 if(item) {
-                    if(sourceTable === viecoiTables.NESOTE_JOBPORTAL_JOBS.sourceTable.name) {
-                        if(item.date_expired === '0000-00-00') item.date_expired = '2000-01-01';
-                        if(typeof item.order_date_expired === 'object') item.order_date_expired = '2000-01-01 00:00:00';
-                        if(typeof item.date_fix === 'object' || item.date_fix === '0000-00-00') item.date_fix = '2000-01-01';
-                        if(item.date_send_email === '0000-00-00') item.date_send_email = '2000-01-01';
-                        if(typeof item.created_at === 'object') item.created_at = '2000-01-01 00:00:00';
-                        if(typeof item.updated_at === 'object') item.updated_at = '2000-01-01 00:00:00';
-                        if(item.time_expired === '0000-00-00') item.time_expired = '2000-01-01';
-                        if(item.time_expired_old === '0000-00-00') item.time_expired_old = '2000-01-01';
+                    if(vHelper.CLEAN_FUNCTIONS[`getCleanData_${sourceTableKey}`]) {
+                        item = vHelper.CLEAN_FUNCTIONS[`getCleanData_${sourceTableKey}`](item);
                     }
                 }
 
@@ -99,7 +97,14 @@ for(const table in viecoiTables) {
         // console.log(`Table: ${sourceTable.name} is not permissioned for syncing data`); 
         continue;
     }   
-    syncTableData(sourceTable.name, targetTable.name, { isTruncated })
+    syncTableData(
+        sourceTable.name, 
+        targetTable.name, 
+        { 
+            isTruncated,
+            sourceTableKey: table, 
+        }
+    )
     .then(() => {
         console.log(`Data synced successfully for table: ${sourceTable.name}`);
     })

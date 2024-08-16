@@ -1,0 +1,8 @@
+{
+    "autoload": {
+        "files": [
+            "app/helpers.js",
+            "app/database.js"
+        ]
+    }
+}

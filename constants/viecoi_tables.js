@@ -24,8 +24,8 @@ module.exports = Object.assign({}, {
         targetTable: { name: 'failed_emails' }
     },
     FAILED_JOBS: {
-        isSynced: true,
-        isTruncated: true,
+        isSynced: false,
+        isTruncated: false,
         sourceTable: { name: 'failed_jobs' },
         targetTable: { name: 'failed_jobs' }
     },

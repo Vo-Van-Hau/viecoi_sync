@@ -34,9 +34,6 @@ async function handleTableData(tableName) {
     }
 }
 
-// console.log();
-// return;
-
 /**
  * Inserts data into the specified table in the target database.
  * @param {string} sourceTable - The name of the source table to fetch data from.
@@ -64,7 +61,9 @@ async function syncTableData(sourceTable, targetTable, options = {}) {
                 }
 
                 // Get column names and corresponding values dynamically
-                const columns = Object.keys(item).join(', ');
+                const columns = Object.keys(item)
+                .map(column => `\`${column}\``) // Escape column names
+                .join(', '); // Join column names with a comma
                 const values = Object.values(item);
                 const placeholders = values.map(() => '?').join(', '); // Create placeholders for query
 

@@ -81,6 +81,8 @@ function getCleanData_NESOTE_INOUTSCRIPTS_USERS(item) {
  * @returns {Object} - The cleaned data item.
  */
 function getCleanData_NESOTE_JOBPORTAL_ACTIVITY(item) {
+    if(typeof item.date_active === 'object') item.date_active = '2000-01-01 00:00:00';
+    // TODO:
     return item;
 }
 
@@ -297,6 +299,10 @@ function getCleanData_NESOTE_JOBPORTAL_CV_EMP_USER(item) {
  * @returns {Object} - The cleaned data item.
  */
 function getCleanData_NESOTE_JOBPORTAL_CV_PAYMENT(item) {
+    if(typeof item.payment_date_ask_admin === 'object') item.payment_date_ask_admin = '2000-01-01 00:00:00';
+    if(typeof item.payment_date_not_agree_admin === 'object') item.payment_date_not_agree_admin = '2000-01-01 00:00:00';
+    if(typeof item.payment_date_agree_admin === 'object') item.payment_date_agree_admin = '2000-01-01 00:00:00';
+    // TODO:
     return item;
 }
 
